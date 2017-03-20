@@ -1,1 +1,1 @@
-# Playin platform
+# Playing platform
