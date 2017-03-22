@@ -1,5 +1,6 @@
 (function(document) {
   var container = document.getElementById("container");
+  var scoreInfo = document.getElementById('score-info');
 
   document.getElementById('display-scores').addEventListener ("click", getScores, false);
 
@@ -9,9 +10,10 @@
   function getScores() {
     document.getElementById("content").setAttribute('style', 'display: flex;');
 
-    while (container.hasChildNodes()) {
-      container.removeChild(container.firstChild);
-    }
+    container = refreshElement(container);
+    scoreInfo = refreshElement(scoreInfo);
+
+    scoreInfo.appendChild(document.createTextNode('Select a bar to see the score details.'));
 
     fetch('http://cdn.55labs.com/demo/api.json')
       .then(function(response) {
@@ -38,7 +40,7 @@
         if (date) {
           var date = parseInt(vm.dates[index]);
           var detail = {
-            fullname: settings.dictionary[playerName].firstname + ' ' + settings.dictionary[playerName].firstname,
+            fullname: settings.dictionary[playerName].firstname + ' ' + settings.dictionary[playerName].lastname,
             date: new Date(date),
             score: player.points[index]
           }
@@ -65,13 +67,21 @@
     var scoreContainer = document.getElementById('score-info');
     var scoreDetail = '';
 
-    while (scoreContainer.hasChildNodes()) {
-      scoreContainer.removeChild(scoreContainer.firstChild);
-    }
+    scoreContainer = refreshElement(scoreContainer);
 
-    scoreDetail = '<div>' + arg.fullname + '</div>'+
-      '<div>' + arg.score + '</div>'+
-      '<div>' + arg.date + '</div>';
+    scoreDetail = '<div class="score-info__element"><span>Player name: </span>' + arg.fullname + '</div>'+
+      '<div class="score-info__element"><span>Score: </span>' + arg.score + '</div>'+
+      '<div class="score-info__element"><span>Date: </span>' + arg.date.strftime('%F') + '</div>'+
+      '<div class="score-info__element"><span>Time: </span>' + arg.date.strftime('%T') + '</div>';
     scoreContainer.innerHTML += scoreDetail;
+  }
+
+  function refreshElement(element) {
+    if (element.hasChildNodes()) {
+      element.removeChild(element.firstChild);
+      return refreshElement(element);
+    } else {
+      return element;
+    }
   }
 })(document);

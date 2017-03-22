@@ -103,7 +103,7 @@ button.display-data {
   flex-direction: column;
   padding: 15px;
   width: 30%;
-  height: 100vh - 174px;
+  height: 100vh;
   border-left: #bdbdbd 1px solid;
 }
 
@@ -113,6 +113,23 @@ button.display-data {
   font-weight: 700;
   color: #d32F2f;
   text-transform: uppercase;
+}
+
+.score-info__element {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#score-info {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+}
+
+.score-info__element > span {
+  color: #197196;
+  margin-right: 8px;
+  font-weight: 700;
 }
 
 @keyframes draw{
