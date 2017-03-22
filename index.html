@@ -4,15 +4,31 @@
 <head>
   <meta charset="utf-8">
   <title>Playing platform</title>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,700' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 
 <body>
-  <div class="container" id="player">
-    <h2 class="bar-title">
+  <header class="header">
+    <div class="header-title">
       Playing platform
-    </h2>
-    <div></div>
+    </div>
+  </header>
+  <div class="welcome">
+    <div class="welcome__description">
+      Hello to the new app, You can fetch the last data by clicking on the button.
+    </div>
+    <button class="display-data"
+      type="submit">
+      Get last scores
+    </button>
+  </div>
+  <div class="content">
+    <div class="container" id="player">
+    </div>
+    <aside class="aside">
+      <h2>Score detail</h2>
+    </aside>
   </div>
   <!-- Inject app.js -->
   <script src="app.js"></script>

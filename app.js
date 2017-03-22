@@ -26,13 +26,13 @@
       });
     });
 
-  document.addEventListener('click', showScoreDetails);
 
 /////////////////////
 
   function animateBars() {
     var _bars = [].slice.call(document.querySelectorAll('.bar-inner'));
     _bars.map(function(bar) {
+      bar.addEventListener ("click", showScoreDetails, false)
       bar.style.height = bar.dataset.percent;
     });
   }
@@ -43,10 +43,6 @@
       score: e.target.dataset.score
     }
     console.log(selectedScoreInfo);
-
-
   }
-
-
 
 })(document);
