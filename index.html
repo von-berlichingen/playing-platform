@@ -11,23 +11,27 @@
 <body>
   <header class="header">
     <div class="header-title">
-      Playing platform
+      Online Playing Platform
     </div>
   </header>
   <div class="welcome">
     <div class="welcome__description">
-      Hello to the new app, You can fetch the last data by clicking on the button.
+      <div>Hello!</div>
+      <div>You can fetch the last data by clicking on the button.</div>
     </div>
     <button class="display-data"
-      type="submit">
+      id="display-scores">
       Get last scores
     </button>
   </div>
-  <div class="content">
-    <div class="container" id="player">
+  <div id="content" class="content">
+    <div class="container" id="container">
     </div>
-    <aside class="aside">
-      <h2>Score detail</h2>
+    <aside class="sidebar">
+      <div class="sidebar-title">Score detail</div>
+      <div id="score-info">
+        Select a bar to see the score details.
+      </div>
     </aside>
   </div>
   <!-- Inject app.js -->

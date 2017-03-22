@@ -1,48 +1,77 @@
 (function(document) {
-  var htmlElements = "";
-  var container = document.getElementById("player");
+  var container = document.getElementById("container");
 
-  fetch('http://cdn.55labs.com/demo/api.json')
-    .then(function(response) {
-      response.json()
-      .then(function(data) {
-        var vm = data.data.DAILY;
-        Object.keys(vm.dataByMember.players).map(function(playerName) {
-          var player = vm.dataByMember.players[playerName];
-          htmlElements += '<div class="player-stat"><div class="bar">';
-          vm.dates.map(function(date, index) {
-            if (date) {
-              var percentage = Math.ceil(player.points[index] * 0.1);
-              htmlElements += '<div class="bar-inner" id="barInner" data-player=' + playerName +
-                                ' data-score =' + player.points[index] +
-                                ' data-percent=' + percentage + '%></div>';
-            }
-          });
-          htmlElements += '</div><div class="bar-title">' + playerName+ '</div></div>';
-          container.innerHTML += htmlElements;
-          animateBars();
-          htmlElements = "";
-        });
-      });
-    });
+  document.getElementById('display-scores').addEventListener ("click", getScores, false);
 
 
-/////////////////////
+  /////////////////////
 
-  function animateBars() {
-    var _bars = [].slice.call(document.querySelectorAll('.bar-inner'));
-    _bars.map(function(bar) {
-      bar.addEventListener ("click", showScoreDetails, false)
-      bar.style.height = bar.dataset.percent;
-    });
-  }
+  function getScores() {
+    document.getElementById("content").setAttribute('style', 'display: flex;');
 
-  function showScoreDetails(e) {
-    var selectedScoreInfo = {
-      player: e.target.dataset.player,
-      score: e.target.dataset.score
+    while (container.hasChildNodes()) {
+      container.removeChild(container.firstChild);
     }
-    console.log(selectedScoreInfo);
+
+    fetch('http://cdn.55labs.com/demo/api.json')
+      .then(function(response) {
+        response
+          .json()
+          .then(requestData);
+      });
   }
 
+  function requestData(data) {
+    var vm = data.data.DAILY;
+    var settings = data.settings;
+
+    Object.keys(vm.dataByMember.players).map(function(playerName) {
+      var player = vm.dataByMember.players[playerName];
+      var playerStatDiv = document.createElement('div');
+      var barDiv = document.createElement('div');
+
+      playerStatDiv.classList.add('player-stat');
+      barDiv.classList.add('bar');
+      playerStatDiv.appendChild(barDiv);
+
+      vm.dates.map(function(date, index) {
+        if (date) {
+          var date = parseInt(vm.dates[index]);
+          var detail = {
+            fullname: settings.dictionary[playerName].firstname + ' ' + settings.dictionary[playerName].firstname,
+            date: new Date(date),
+            score: player.points[index]
+          }
+          barDiv.appendChild(createBarChart(detail));
+        }
+      });
+      container.appendChild(playerStatDiv);
+    });
+  }
+
+  function createBarChart(settings) {
+    var newBar = document.createElement('div');
+
+    newBar.dataset.score = settings.score;
+    newBar.dataset.percentage = Math.ceil(settings.score * 0.1);
+    newBar.classList.add('bar-inner');
+    newBar.setAttribute('style', 'height:' + Math.ceil(settings.score * 0.1) + '%;');
+    newBar.addEventListener ("click", function() {showScoreDetails(settings)}, false);
+
+    return newBar;
+  }
+
+  function showScoreDetails(arg) {
+    var scoreContainer = document.getElementById('score-info');
+    var scoreDetail = '';
+
+    while (scoreContainer.hasChildNodes()) {
+      scoreContainer.removeChild(scoreContainer.firstChild);
+    }
+
+    scoreDetail = '<div>' + arg.fullname + '</div>'+
+      '<div>' + arg.score + '</div>'+
+      '<div>' + arg.date + '</div>';
+    scoreContainer.innerHTML += scoreDetail;
+  }
 })(document);

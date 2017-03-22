@@ -5,16 +5,7 @@ body {
   margin: 0;
 }
 .content {
-  display: flex;
-  flex-direction: row;
-}
-
-.container {
-  height: 100%;
-  padding: 15px;
-  background-color: #fff;
-  width: 100%;
-  overflow-x: scroll;
+  display: none;
 }
 
 .header {
@@ -22,7 +13,7 @@ body {
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  background-color: #039BE5;
+  background-color: #197196;
   box-shadow: 0 2px 5px black;
   -webkit-box-shadow: 0 2px 5px black;
   -moz-box-shadow: 0 2px 5px black;
@@ -37,13 +28,16 @@ body {
 .welcome {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   margin-top: 20px;
-  border-bottom: black 1px solid;
+  border-bottom: #bdbdbd 1px solid;;
 }
 
 .welcome__description {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   margin-left: 10px;
 }
 
@@ -58,6 +52,13 @@ button.display-data {
   display: inline-block;
   font-size: 16px;
   cursor: pointer;
+}
+
+.container {
+  width: 70%;
+  padding: 15px;
+  background-color: #fff;
+  overflow-x: auto;
 }
 
 .bar-title {
@@ -81,10 +82,15 @@ button.display-data {
   margin-right: 3px;
   display: flex;
   justify-content: center;
-  background-color: #0074D9;
+  background-color: #12668c;
   opacity: 0.8;
   width: 50px;
   animation: draw 1s ease-in-out;
+}
+
+.bar-inner:hover {
+  opacity: 1;
+  background-color: #004269;
 }
 
 .bar-inner:hover::after {
@@ -92,9 +98,21 @@ button.display-data {
   content:attr(data-score);
 }
 
-.aside {
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
   width: 30%;
-  border-left: black 1px solid;
+  height: 100vh - 174px;
+  border-left: #bdbdbd 1px solid;
+}
+
+.sidebar-title {
+  display: flex;
+  align-self: center;
+  font-weight: 700;
+  color: #d32F2f;
+  text-transform: uppercase;
 }
 
 @keyframes draw{
