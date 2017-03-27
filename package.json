@@ -1,0 +1,27 @@
+{
+  "name": "playing-platform",
+  "version": "1.0.0",
+  "description": "A full Vanilla Javascript website",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/von-berlichingen/playing-platform.git"
+  },
+  "keywords": [
+    "Native",
+    "Vanilla",
+    "Javascript"
+  ],
+  "author": "Anis Ben Amara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/von-berlichingen/playing-platform/issues"
+  },
+  "homepage": "https://github.com/von-berlichingen/playing-platform#readme",
+  "devDependencies": {
+    "qunitjs": "2.2.1"
+  }
+}
